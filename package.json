@@ -1,0 +1,97 @@
+{
+  "name": "nexo",
+  "private": true,
+  "version": "1.3.5",
+  "type": "module",
+  "main": "electron/main.mjs",
+  "scripts": {
+    "dev": "concurrently -k -n web,signal -c cyan,magenta \"vite\" \"node server/index.js\"",
+    "dev:web": "vite",
+    "dev:signal": "node server/index.js",
+    "prebuild": "node scripts/bump-version.mjs && node scripts/prepare-sounds.mjs",
+    "build:web": "tsc -b && vite build",
+    "build": "npm run build:web",
+    "start": "node server/index.js",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "desktop:dev": "concurrently -k -n web,electron -c cyan,magenta \"vite\" \"electron .\"",
+    "desktop:clean": "node scripts/clean-desktop-build.mjs",
+    "desktop:build": "npm run desktop:clean && npm run build && electron-builder --win",
+    "desktop:publish": "node scripts/publish-desktop.mjs",
+    "desktop:open": "explorer %USERPROFILE%\\.nexo-build\\electron-dist",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.4.0",
+    "@tauri-apps/plugin-autostart": "^2.5.0",
+    "@tauri-apps/plugin-shell": "^2.2.0",
+    "concurrently": "^9.2.1",
+    "express": "^5.1.0",
+    "lucide-react": "^0.542.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260823.1",
+    "@tauri-apps/cli": "^2.4.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "wrangler": "^4.125.0"
+  },
+  "build": {
+    "appId": "dev.nexo.desktop",
+    "productName": "Nexo",
+    "copyright": "Nexo",
+    "directories": {
+      "output": "C:/Users/LK/.nexo-build/electron-dist",
+      "buildResources": "electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/main.mjs",
+      "electron/preload.cjs",
+      "electron/icon.ico",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "electron/icon.ico",
+        "to": "icon.ico"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "electron/icon.ico",
+      "artifactName": "Nexo-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Nexo",
+      "installerIcon": "electron/icon.ico",
+      "uninstallerIcon": "electron/icon.ico",
+      "installerHeaderIcon": "electron/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "language": "1046"
+    }
+  }
+}

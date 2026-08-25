@@ -1,0 +1,2 @@
+# Target local do Tauri (só se usar `npm run tauri:build`).
+# Não aponta mais para %USERPROFILE%\.nexo-build — evitava ~4GB acumulados.

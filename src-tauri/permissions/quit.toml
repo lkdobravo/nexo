@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "allow-quit-app"
+description = "Permite encerrar o Nexo Desktop por completo"
+commands.allow = ["quit_app"]

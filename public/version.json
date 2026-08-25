@@ -1,0 +1,11 @@
+{
+  "version": "1.3.5",
+  "build": 1787689424554,
+  "deployedAt": "2026-08-25T20:23:44.554Z",
+  "desktop": {
+    "version": "1.3.5",
+    "installer": "Nexo-Setup-1.3.5.exe",
+    "url": "https://nexo.nexo-app.workers.dev/releases/Nexo-Setup-1.3.5.exe",
+    "available": false
+  }
+}

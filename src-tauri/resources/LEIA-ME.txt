@@ -1,0 +1,15 @@
+Nexo Desktop
+============
+
+Este pacote contém o aplicativo nativo Nexo.
+
+Arquivos típicos após a instalação:
+- nexo.exe              → executável principal
+- uninstall.exe         → desinstalador
+- recursos WebView2     → runtime embutido (quando necessário)
+- atalho no Menu Iniciar e Área de Trabalho
+
+O servidor de chat/chamadas fica online em:
+https://nexo.nexo-app.workers.dev
+
+A interface NÃO abre o site no navegador: ela está embutida neste programa.
